@@ -33,6 +33,12 @@ st.markdown(
 st.title("NLB Maize Detection")
 st.write("Detect Northern Leaf Blight (NLB) in maize plants from images.")
 
+# Instructions
+st.subheader("Instructions")
+st.write("1. Upload an image of a maize leaf.")
+st.write("2. We will analyze the image and provide you with the result.")
+st.write("3. If your plants are unhealthy, we recommend some fertilizers for you.")
+
 # Upload image
 uploaded_image = st.file_uploader("Upload an image of a maize leaf", type=["jpg", "jpeg", "png"])
 
@@ -45,7 +51,7 @@ if uploaded_image is not None:
 
     # Perform NLB detection
     with st.spinner("Analyzing..."):
-        prediction = model.predict(np.expand_dims(preprocessed_image, axis=0)
+        prediction = model.predict(np.expand_dims(preprocessed_image, axis=0))
         prediction_probability = prediction[0][0]
 
     st.write(f"Prediction Probability: {prediction_probability:.2f}")
@@ -59,13 +65,12 @@ if uploaded_image is not None:
         # List of recommended fertilizers
         st.subheader("Recommended Fertilizers:")
         st.write("- [Booster Foliar Fertilizer 1Ltr](https://cheapthings.co.ke/product/booster-foliar-fertilizer-1ltr/?gad=1&gclid=Cj0KCQjwhL6pBhDjARIsAGx8D59O3FXxJTZkvS9UTNG8iNWSBqVuQ6DNVfmrVQNTImX0ohgp80AX1qIaAvlJEALw_wcB)")
-        
-        
-        # You can add more recommended products and their links
+       #st.write("- [Maize Pro-Gro Fertilizer 5Kg](https://cheapthings.co.ke/product/maize-pro-gro-fertilizer-5kg/?gad=1&gclid=Cj0KCQjwhL6pBhDjARIsAGx8D5ws7zqXY4_8ssJQqMuY-HOKJyoSBW96EO05Hh5uhQ8Fu8cVDOViJwcaAqVREALw_wcB)")
+        # Add more recommended products and their links if desired
 
     else:
         st.success("Your maize plants appear to be healthy. Here are some tips for maintaining their well-being:")
-        st.write("- Watering schedule.")
-        st.write("- Fertilization recommendations.")
+        st.write("- Maintain a proper watering schedule.")
+        st.write("- Follow fertilization recommendations.")
 
 st.write("Upload an image to detect NLB in maize leaves.")
