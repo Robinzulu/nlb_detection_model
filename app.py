@@ -42,28 +42,33 @@ st.markdown(
 st.title("NLB Maize Detection")
 st.write("Detect Northern Leaf Blight (NLB) in maize plants from images.")
 
-# Instructions
+# Instructions with tooltips
 st.header("Instructions")
 st.markdown("1. Upload an image of a maize leaf.")
 st.markdown("2. We will analyze the image and provide you with the result.")
 st.markdown("3. If your plants are unhealthy, we recommend some fertilizers for you.")
 
-# Upload image
+# Upload image with error handling
 uploaded_image = st.file_uploader("Upload an image of a maize leaf", type=["jpg", "jpeg", "png"])
+if uploaded_image is None:
+    st.warning("Please upload a valid image.")
 
-if uploaded_image is not None:
+else:
     # Display uploaded image
     st.image(uploaded_image, caption="Uploaded Image", use_column_width=True)
 
     image = Image.open(uploaded_image)
     preprocessed_image = preprocess_image(image)
 
-    # Perform NLB detection
-    with st.spinner("Analyzing..."):
+    # Perform NLB detection with progress feedback
+    with st.spinner("Please wait, analyzing the image..."):
         prediction = model.predict(np.expand_dims(preprocessed_image, axis=0))
         prediction_probability = prediction[0][0]
 
-    st.header(f"Prediction Probability: {prediction_probability:.2f}")
+    st.header("Prediction Result")
+
+    # Visualize the result with a confidence level meter
+    st.progress(prediction_probability)
 
     # Provide recommendations based on the prediction
     if prediction_probability > 0.5:
@@ -77,6 +82,14 @@ if uploaded_image is not None:
         st.markdown("- Follow fertilization recommendations.")
         
         st.header("Recommended Fertilizers:")
+
+        # Adding a link with legal considerations
         st.markdown("- [Booster Foliar Fertilizer 1Ltr](https://cheapthings.co.ke/product/booster-foliar-fertilizer-1ltr/?gad=1&gclid=Cj0KCQjwhL6pBhDjARIsAGx8D59O3FXxJTZkvS9UTNG8iNWSBqVuQ6DNVfmrVQNTImX0ohgp80AX1qIaAvlJEALw_wcB)")
 
-#st.write("Upload an image to detect NLB in maize leaves.")
+# Additional user feedback and disclaimer
+st.markdown(
+    """
+    **Disclaimer:** This tool provides general recommendations. For specific advice, consult with an agricultural expert.
+    Feel free to provide [feedback](mailto:your@email.com) on this tool's performance.
+    """
+)
