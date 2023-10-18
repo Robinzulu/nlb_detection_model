@@ -16,19 +16,22 @@ def preprocess_image(image):
 # Load the trained NLB detection model
 model = load_model('nlb_detection_model.h5')
 
-# Set the background color to dark blue
+# Set the background color and text color
 st.markdown(
     """
     <style>
     body {
-        background-color: darkgreen;
-        color: #71ed6d;
+        background-color: #03045e; /* Dark blue background */
+        color: #ffffff; /* White text */
     }
     h1 {
-        color: darkgreen;
+        color: darkgreen; /* Dark green title */
     }
     h2 {
-        color: darkgreen;
+        color: #ff6600; /* Orange for subheaders */
+    }
+    p {
+        color: #ffcc00; /* Yellow for paragraphs */
     }
     </style>
     """,
@@ -40,10 +43,10 @@ st.title("NLB Maize Detection")
 st.write("Detect Northern Leaf Blight (NLB) in maize plants from images.")
 
 # Instructions
-st.subheader("Instructions")
-st.write("1. Upload an image of a maize leaf.")
-st.write("2. We will analyze the image and provide you with the result.")
-st.write("3. If your plants are unhealthy, we recommend some fertilizers for you.")
+st.header("Instructions")
+st.markdown("1. Upload an image of a maize leaf.")
+st.markdown("2. We will analyze the image and provide you with the result.")
+st.markdown("3. If your plants are unhealthy, we recommend some fertilizers for you.")
 
 # Upload image
 uploaded_image = st.file_uploader("Upload an image of a maize leaf", type=["jpg", "jpeg", "png"])
@@ -60,20 +63,20 @@ if uploaded_image is not None:
         prediction = model.predict(np.expand_dims(preprocessed_image, axis=0))
         prediction_probability = prediction[0][0]
 
-    st.subheader(f"Prediction Probability: {prediction_probability:.2f}")
+    st.header(f"Prediction Probability: {prediction_probability:.2f}")
 
     # Provide recommendations based on the prediction
     if prediction_probability > 0.5:
         st.warning("Your plants may be unhealthy. Consider taking the following steps:")
-        st.write("- Consult with an agricultural expert.")
-        st.write("- Apply appropriate treatments.")
+        st.markdown("- Consult with an agricultural expert.")
+        st.markdown("- Apply appropriate treatments.")
 
     else:
         st.success("Your maize plants appear to be healthy. Here are some tips for maintaining their well-being:")
-        st.write("- Maintain a proper watering schedule.")
-        st.write("- Follow fertilization recommendations.")
+        st.markdown("- Maintain a proper watering schedule.")
+        st.markdown("- Follow fertilization recommendations.")
         
-        st.subheader("Recommended Fertilizers:")
-        st.write("- [Booster Foliar Fertilizer 1Ltr](https://cheapthings.co.ke/product/booster-foliar-fertilizer-1ltr/?gad=1&gclid=Cj0KCQjwhL6pBhDjARIsAGx8D59O3FXxJTZkvS9UTNG8iNWSBqVuQ6DNVfmrVQNTImX0ohgp80AX1qIaAvlJEALw_wcB)")
+        st.header("Recommended Fertilizers:")
+        st.markdown("- [Booster Foliar Fertilizer 1Ltr](https://cheapthings.co.ke/product/booster-foliar-fertilizer-1ltr/?gad=1&gclid=Cj0KCQjwhL6pBhDjARIsAGx8D59O3FXxJTZkvS9UTNG8iNWSBqVuQ6DNVfmrVQNTImX0ohgp80AX1qIaAvlJEALw_wcB)")
 
 #st.write("Upload an image to detect NLB in maize leaves.")
