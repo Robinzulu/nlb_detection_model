@@ -21,17 +21,17 @@ st.markdown(
     """
     <style>
     body {
-        background-color: #03045e; /* Dark blue background */
-        color: #ffffff; /* White text */
+        background-color: darkgreen; /* Dark blue background */
+        color: darkgreen; /* White text */
     }
     h1 {
         color: darkgreen; /* Dark green title */
     }
     h2 {
-        color: #ff6600; /* Orange for subheaders */
+        color: darkgreen; /* Orange for subheaders */
     }
     p {
-        color: #ffcc00; /* Yellow for paragraphs */
+        color: black; /* Yellow for paragraphs */
     }
     </style>
     """,
