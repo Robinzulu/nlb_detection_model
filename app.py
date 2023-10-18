@@ -42,6 +42,12 @@ st.markdown(
 st.title("NLB Maize Detection")
 st.write("Detect Northern Leaf Blight (NLB) in maize plants from images.")
 
+# Display the image of fertilizer
+st.title("Fertilizer Image")
+st.write("This is an image of the fertilizer:")
+fertilizer_image_url = "https://imgur.com/a/fiyOU4u"  # Replace with the actual URL
+st.image(fertilizer_image_url, caption="Fertilizer Image", use_column_width=True)
+
 # Instructions
 st.header("Instructions")
 st.markdown("1. Upload an image of a maize leaf.")
