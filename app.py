@@ -73,4 +73,4 @@ if uploaded_image is not None:
    
 
 
-st.write("Upload an image to detect NLB in maize leaves.")
+#st.write("Upload an image to detect NLB in maize leaves.")
