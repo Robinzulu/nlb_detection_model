@@ -1,8 +1,8 @@
 # Instructions
-st.subheader("Instructions")
-st.write("1. Upload an image of a maize leaf OR click the button below to capture a photo with your camera.")
-st.write("2. We will analyze the image and provide you with the result.")
-st.write("3. If your plants are unhealthy, we recommend some fertilizers for you.")
+#st.subheader("Instructions")
+#st.write("1. Upload an image of a maize leaf OR click the button below to capture a photo with your camera.")
+#st.write("2. We will analyze the image and provide you with the result.")
+#st.write("3. If your plants are unhealthy, we recommend some fertilizers for you.")
 
 # Capture image using the camera
 if st.button("Capture Photo"):
