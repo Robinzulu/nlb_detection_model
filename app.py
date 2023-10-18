@@ -24,6 +24,9 @@ st.markdown(
         background-color: #03045e;
         color: #ffffff;
     }
+    h1 {
+        color: darkgreen;
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -62,7 +65,6 @@ if uploaded_image is not None:
         st.write("- Consult with an agricultural expert.")
         st.write("- Apply appropriate treatments.")
 
-        
     else:
         st.success("Your maize plants appear to be healthy. Here are some tips for maintaining their well-being:")
         st.write("- Maintain a proper watering schedule.")
@@ -70,7 +72,5 @@ if uploaded_image is not None:
         
         st.subheader("Recommended Fertilizers:")
         st.write("- [Booster Foliar Fertilizer 1Ltr](https://cheapthings.co.ke/product/booster-foliar-fertilizer-1ltr/?gad=1&gclid=Cj0KCQjwhL6pBhDjARIsAGx8D59O3FXxJTZkvS9UTNG8iNWSBqVuQ6DNVfmrVQNTImX0ohgp80AX1qIaAvlJEALw_wcB)")
-   
-
 
 #st.write("Upload an image to detect NLB in maize leaves.")
