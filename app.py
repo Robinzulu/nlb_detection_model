@@ -31,6 +31,10 @@ st.markdown(
 
 st.title("NLB Maize Detection")
 
+# Add instructions
+st.markdown("### Instructions")
+st.write("This app is designed to detect Northern Leaf Blight (NLB) in maize plants. To use it, please upload an image of a maize leaf. We will analyze the image and provide you with a result.")
+
 uploaded_image = st.file_uploader("Upload an image...", type=["jpg", "jpeg", "png"])
 
 if uploaded_image is not None:
@@ -41,11 +45,17 @@ if uploaded_image is not None:
 
     # Perform NLB detection
     prediction = model.predict(np.expand_dims(preprocessed_image, axis=0))
-    result = 'Unhealthy' if prediction[0][0] > 0.5 else 'Healthy'
+    prediction_probability = prediction[0][0]
 
-    if result == 'Unhealthy':
-        st.warning("Your plants may be unhealthy. Consider taking necessary measures and consulting with an agricultural expert.")
+    st.write(f"Prediction Probability: {prediction_probability:.2f}")
+
+    if prediction_probability > 0.5:
+        st.warning("Your plants may be unhealthy. Consider taking the following steps:")
+        st.write("- Consult with an agricultural expert.")
+        st.write("- Apply appropriate treatments.")
     else:
-        st.success("Your maize plants appear to be healthy. Continue with proper care to maintain their well-being.")
-        st.write("Upload an image to detect NLB in maize leaves.")
+        st.success("Your maize plants appear to be healthy. Here are some tips for maintaining their well-being:")
+        st.write("- Watering schedule.")
+        st.write("- Fertilization recommendations.")
 
+st.write("Upload an image to detect NLB in maize leaves.")
