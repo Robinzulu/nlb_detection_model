@@ -42,11 +42,15 @@ st.markdown(
 st.title("NLB Maize Detection")
 st.write("Detect Northern Leaf Blight (NLB) in maize plants from images.")
 
-# Instructions
+# Instructions with additional recommendations and photo requirements
 st.header("Instructions")
 st.markdown("1. Upload an image of a maize leaf.")
 st.markdown("2. We will analyze the image and provide you with the result.")
-st.markdown("3. If your plants are unhealthy, we recommend some fertilizers for you.")
+st.markdown("3. For accurate results, make sure your photo meets these criteria:")
+st.markdown("   - The photo should not contain too many leaves; focus on a single leaf or a few leaves.")
+st.markdown("   - Ensure the photo is clear and well-lit.")
+st.markdown("4. If your plants are healthy, we recommend some fertilizers for you.")
+st.markdown("4. If your plants are unhealthy, we recommend taking the following steps:")
 
 # Upload image
 uploaded_image = st.file_uploader("Upload an image of a maize leaf", type=["jpg", "jpeg", "png"])
@@ -78,5 +82,3 @@ if uploaded_image is not None:
         
         st.header("Recommended Fertilizers:")
         st.markdown("- [Booster Foliar Fertilizer 1Ltr](https://cheapthings.co.ke/product/booster-foliar-fertilizer-1ltr/?gad=1&gclid=Cj0KCQjwhL6pBhDjARIsAGx8D59O3FXxJTZkvS9UTNG8iNWSBqVuQ6DNVfmrVQNTImX0ohgp80AX1qIaAvlJEALw_wcB)")
-
-#st.write("Upload an image to detect NLB in maize leaves.")
