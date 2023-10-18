@@ -67,11 +67,14 @@ else:
 
     st.header("Prediction Result")
 
+    # Scale prediction_probability to be between 0.0 and 1.0
+    scaled_prediction_probability = max(0.0, min(1.0, prediction_probability))
+
     # Visualize the result with a confidence level meter
-    st.progress(prediction_probability)
+    st.progress(scaled_prediction_probability)
 
     # Provide recommendations based on the prediction
-    if prediction_probability > 0.5:
+    if scaled_prediction_probability > 0.5:
         st.warning("Your plants may be unhealthy. Consider taking the following steps:")
         st.markdown("- Consult with an agricultural expert.")
         st.markdown("- Apply appropriate treatments.")
