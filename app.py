@@ -29,30 +29,40 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+# Title and description
 st.title("NLB Maize Detection")
+st.write("Detect Northern Leaf Blight (NLB) in maize plants from images.")
 
-# Add instructions
-st.markdown("### Instructions")
-st.write("This app is designed to detect Northern Leaf Blight (NLB) in maize plants. To use it, please upload an image of a maize leaf. We will analyze the image and provide you with a result.")
-
-uploaded_image = st.file_uploader("Upload an image...", type=["jpg", "jpeg", "png"])
+# Upload image
+uploaded_image = st.file_uploader("Upload an image of a maize leaf", type=["jpg", "jpeg", "png"])
 
 if uploaded_image is not None:
-    st.image(uploaded_image, caption="Uploaded Image", use_column_width=False, output_format='JPEG', width=300)
+    # Display uploaded image
+    st.image(uploaded_image, caption="Uploaded Image", use_column_width=True)
 
     image = Image.open(uploaded_image)
     preprocessed_image = preprocess_image(image)
 
     # Perform NLB detection
-    prediction = model.predict(np.expand_dims(preprocessed_image, axis=0))
-    prediction_probability = prediction[0][0]
+    with st.spinner("Analyzing..."):
+        prediction = model.predict(np.expand_dims(preprocessed_image, axis=0)
+        prediction_probability = prediction[0][0]
 
     st.write(f"Prediction Probability: {prediction_probability:.2f}")
 
+    # Provide recommendations based on the prediction
     if prediction_probability > 0.5:
         st.warning("Your plants may be unhealthy. Consider taking the following steps:")
         st.write("- Consult with an agricultural expert.")
         st.write("- Apply appropriate treatments.")
+
+        # List of recommended fertilizers
+        st.subheader("Recommended Fertilizers:")
+        st.write("- [Booster Foliar Fertilizer 1Ltr](https://cheapthings.co.ke/product/booster-foliar-fertilizer-1ltr/?gad=1&gclid=Cj0KCQjwhL6pBhDjARIsAGx8D59O3FXxJTZkvS9UTNG8iNWSBqVuQ6DNVfmrVQNTImX0ohgp80AX1qIaAvlJEALw_wcB)")
+        st.write("- [Maize Pro-Gro Fertilizer 5Kg](https://cheapthings.co.ke/product/maize-pro-gro-fertilizer-5kg/?gad=1&gclid=Cj0KCQjwhL6pBhDjARIsAGx8D5ws7zqXY4_8ssJQqMuY-HOKJyoSBW96EO05Hh5uhQ8Fu8cVDOViJwcaAqVREALw_wcB)")
+        
+        # You can add more recommended products and their links
+
     else:
         st.success("Your maize plants appear to be healthy. Here are some tips for maintaining their well-being:")
         st.write("- Watering schedule.")
