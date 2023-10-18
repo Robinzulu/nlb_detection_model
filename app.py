@@ -47,7 +47,5 @@ if uploaded_image is not None:
         st.warning("Your plants may be unhealthy. Consider taking necessary measures and consulting with an agricultural expert.")
     else:
         st.success("Your maize plants appear to be healthy. Continue with proper care to maintain their well-being.")
+        st.write("Upload an image to detect NLB in maize leaves.")
 
-    st.write("")  # Add some spacing
-
-st.write("Upload an image to detect NLB in maize leaves.")
