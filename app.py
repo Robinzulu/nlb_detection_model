@@ -36,7 +36,7 @@ st.title("NLB Maize Detection")
 uploaded_image = st.file_uploader("Upload an image...", type=["jpg", "jpeg", "png"])
 
 if uploaded_image is not None:
-    st.image(uploaded_image, caption="Uploaded Image", use_column_width=True, output_format='JPEG', width=300)
+    st.image(uploaded_image, caption="Uploaded Image", use_column_width=False, output_format='JPEG', width=300)
 
     image = Image.open(uploaded_image)
     preprocessed_image = preprocess_image(image)
