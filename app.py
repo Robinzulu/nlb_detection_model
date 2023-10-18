@@ -21,10 +21,13 @@ st.markdown(
     """
     <style>
     body {
-        background-color: #03045e;
+        background-color: darkgreen;
         color: #ffffff;
     }
     h1 {
+        color: darkgreen;
+    }
+    h2 {
         color: darkgreen;
     }
     </style>
