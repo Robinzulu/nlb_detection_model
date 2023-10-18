@@ -4,7 +4,7 @@ import numpy as np
 from tensorflow.keras.models import load_model
 
 # Set page configuration
-st.set_page_config(page_title="NLB Maize Detection", page_icon="🌽")
+st.set_page_config(page_title="NLB Maize Detection", page_icon="🌽", layout="wide")
 
 
 # Define a function to preprocess an image
