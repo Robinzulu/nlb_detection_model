@@ -1,11 +1,10 @@
 import streamlit as st
-from PIL import Image, ImageEnhance
+from PIL import Image
 import numpy as np
 from tensorflow.keras.models import load_model
 
 # Set page configuration
 st.set_page_config(page_title="NLB Maize Detection", page_icon="🌽", layout="wide")
-
 
 # Define a function to preprocess an image
 def preprocess_image(image):
@@ -13,7 +12,6 @@ def preprocess_image(image):
     image = np.array(image)
     image = image / 255.0
     return image
-
 
 # Load the trained NLB detection model
 model = load_model('nlb_detection_model.h5')
@@ -46,10 +44,9 @@ if uploaded_image is not None:
     result = 'Unhealthy' if prediction[0][0] > 0.5 else 'Healthy'
 
     if result == 'Unhealthy':
-        st.warning("Your plants may be unhealthy. Consider spraying them with pesticide.")
-
+        st.warning("Your plants may be unhealthy. Consider taking necessary measures and consulting with an agricultural expert.")
     else:
-        st.write(f"Prediction: {result}", width=300)
+        st.success("Your maize plants appear to be healthy. Continue with proper care to maintain their well-being.")
 
     st.write("")  # Add some spacing
 
