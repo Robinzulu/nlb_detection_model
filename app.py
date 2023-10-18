@@ -59,7 +59,7 @@ if uploaded_image is not None:
         # List of recommended fertilizers
         st.subheader("Recommended Fertilizers:")
         st.write("- [Booster Foliar Fertilizer 1Ltr](https://cheapthings.co.ke/product/booster-foliar-fertilizer-1ltr/?gad=1&gclid=Cj0KCQjwhL6pBhDjARIsAGx8D59O3FXxJTZkvS9UTNG8iNWSBqVuQ6DNVfmrVQNTImX0ohgp80AX1qIaAvlJEALw_wcB)")
-        st.write("- [Maize Pro-Gro Fertilizer 5Kg](https://cheapthings.co.ke/product/maize-pro-gro-fertilizer-5kg/?gad=1&gclid=Cj0KCQjwhL6pBhDjARIsAGx8D5ws7zqXY4_8ssJQqMuY-HOKJyoSBW96EO05Hh5uhQ8Fu8cVDOViJwcaAqVREALw_wcB)")
+        
         
         # You can add more recommended products and their links
 
