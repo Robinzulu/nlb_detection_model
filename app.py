@@ -22,7 +22,7 @@ st.markdown(
     <style>
     body {
         background-color: darkgreen;
-        color: #ffffff;
+        color: #71ed6d;
     }
     h1 {
         color: darkgreen;
