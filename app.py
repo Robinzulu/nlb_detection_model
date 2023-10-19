@@ -80,3 +80,17 @@ if uploaded_image is not None:
         st.markdown("- [Booster Foliar Fertilizer 1Ltr](https://cheapthings.co.ke/product/booster-foliar-fertilizer-1ltr/?gad=1&gclid=Cj0KCQjwhL6pBhDjARIsAGx8D59O3FXxJTZkvS9UTNG8iNWSBqVuQ6DNVfmrVQNTImX0ohgp80AX1qIaAvlJEALw_wcB)")
 
 #st.write("Upload an image to detect NLB in maize leaves.")
+# Your additional recommendations
+st.title("Mastering the Art of Bountiful Corn Farming: Proven Strategies for High Yields and Healthy Crops")
+
+st.header("Recommendations for Healthy Corn Farming:")
+st.markdown("1. **Soil Preparation:**")
+st.markdown("   - Conduct a soil test before planting to determine the pH and nutrient levels in your soil. Adjust soil pH if necessary to fall within the optimal range for corn (around 6.0 to 6.8).")
+st.markdown("   - Incorporate organic matter, such as compost or well-rotted manure, into the soil before planting to improve its structure and water-holding capacity.")
+
+st.markdown("2. **Planting Depth and Spacing:**")
+st.markdown("   - Plant corn seeds at the recommended depth, typically around 1.5 to 2 inches (4-5 cm) deep.")
+st.markdown("   - Follow proper row spacing and plant spacing recommendations for the specific corn variety you are growing. Adequate spacing ensures good air circulation and prevents overcrowding.")
+
+st.markdown("3. **Weed Control:**")
+st.markdown("   - Implement a weed control strategy to minimize competition for nutrients, water, and sunlight. This can include using mulch, cultivating the soil, or using herbicides.")
