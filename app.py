@@ -28,10 +28,10 @@ st.markdown(
         color: darkgreen; /* Dark green title */
     }
     h2 {
-        color: #ff6600; /* Orange for subheaders */
+        color: Darkgreen; /* e for subheaders */
     }
     p {
-        color: #ffcc00; /* Yellow for paragraphs */
+        color: black; /* Yellow for paragraphs */
     }
     </style>
     """,
