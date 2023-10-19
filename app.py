@@ -68,8 +68,69 @@ if uploaded_image is not None:
     # Provide recommendations based on the prediction
     if prediction_probability > 0.5:
         st.warning("Your plants may be unhealthy. Consider taking the following steps:")
-        st.markdown("- Consult with an agricultural expert.")
-        st.markdown("- Apply appropriate treatments.")
+        # Procedure to Cure NLB in Maize
+        st.header("Procedure to Cure Northern Leaf Blight (NLB) in Maize:")
+
+        # Step 1
+        st.markdown("1. **Identification:**")
+        st.markdown("   - Carefully examine the corn plants for symptoms of NLB. These symptoms include long, tan lesions with dark brown borders on the leaves, which often merge and result in large, irregularly shaped spots.")
+
+        # Step 2
+        st.markdown("2. **Isolation:**")
+        st.markdown("   - As soon as you notice NLB symptoms, isolate the infected plants or areas from the healthy ones to prevent the disease from spreading.")
+ 
+        #  Step 3
+        st.markdown("3. **Pruning and Removal:**")
+        st.markdown("   - Remove and destroy severely infected leaves and plants. This reduces the disease's severity and minimizes the spread of spores.")
+
+        # Step 4
+        st.markdown("4. **Fungicide Application:**")
+        st.markdown("   - Consider applying fungicides that are effective against NLB. Consult with a local agricultural extension service or expert for guidance on the appropriate fungicide and application timing.")
+
+        # Step 5
+        st.markdown("5. **Crop Rotation:**")
+        st.markdown("   - Implement a crop rotation plan, avoiding planting corn in the same field for at least two years after NLB infection. This helps break the disease cycle.")
+
+        # Step 6
+        st.markdown("6. **Resistant Varieties:**")
+        st.markdown("   - Choose maize varieties known to be resistant to NLB for future plantings. Resistant varieties can significantly reduce the risk of disease.")
+
+        # Step 7
+        st.markdown("7. **Monitoring and Early Intervention:**")
+        st.markdown("   - Regularly inspect your maize plants for signs of NLB throughout the growing season. Early detection allows for prompt intervention.")
+
+        # Step 8
+        st.markdown("8. **Timely Watering:**")
+        st.markdown("   - Maintain a consistent and appropriate watering schedule. Overly wet conditions can promote NLB development.")
+
+        # Step 9
+        st.markdown("9. **Proper Fertilization:**")
+        st.markdown("   - Follow recommended fertilization practices. Avoid excessive nitrogen, which can make plants more susceptible to NLB.")
+
+        # Step 10
+        st.markdown("10. **Improve Air Circulation:**")
+        st.markdown("    - Ensure good air circulation between plants by planting them at appropriate distances. This reduces humidity and minimizes conditions favorable for disease development.")
+
+        # Step 11
+        st.markdown("11. **Mulching:**")
+        st.markdown("    - Use mulch to prevent soil splashes on leaves, which can carry fungal spores. This minimizes the risk of NLB spread.")
+
+        # Step 12
+        st.markdown("12. **Hygiene and Sanitation:**")
+        st.markdown("    - Practice good field hygiene by cleaning equipment, clothing, and shoes to prevent the introduction of spores from other areas.")
+
+        #     Step 13
+        st.markdown("13. **Post-Harvest Debris Removal:**")
+        st.markdown("    - After harvesting, remove and destroy crop debris and residue to eliminate potential overwintering sites for NLB spores.")
+
+        # Step 14
+        st.markdown("14. **Regular Monitoring:**")
+        st.markdown("    - Continue monitoring your fields for any resurgence of NLB in subsequent planting seasons and take necessary measures as needed.")
+
+       # Step 15
+        st.markdown("15. **Consult Experts:**")
+        st.markdown("    - If NLB persists or worsens despite your efforts, seek advice from agricultural experts or extension services. They can provide tailored recommendations for your specific situation.")
+
 
     else:
         st.success("Your maize plants appear to be healthy. Here are some tips for maintaining their well-being:")
