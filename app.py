@@ -2,7 +2,7 @@ import streamlit as st
 from PIL import Image
 import numpy as np
 from tensorflow.keras.models import load_model
-from streamlit_webrtc import VideoTransformer, webrtc_streamer
+from streamlit_webrtc import webrtc_streamer
 
 # Set page configuration
 st.set_page_config(page_title="NLB Maize Detection", page_icon="🌽", layout="centered")
@@ -63,37 +63,19 @@ def perform_nlb_detection(image):
     prediction_probability = prediction[0][0]
     return prediction_probability
 
-# VideoTransformer class for webcam input
-class VideoTransformer(VideoTransformer):
-    def transform(self, frame):
-        image = Image.fromarray(frame)
-        prediction_probability = perform_nlb_detection(image)
-        return f"Prediction Probability: {prediction_probability:.2f}"
-
 # Option to upload an image
 st.header("Option 1: Upload an Image")
 uploaded_image = st.file_uploader("Upload an image of a maize leaf", type=["jpg", "jpeg", "png"])
 
 # Option to capture an image from the camera
 st.header("Option 2: Capture Image from Camera")
-webrtc_streamer(
-    key="camera",
-    video_transformer_factory=VideoTransformer,
-)
+webrtc_ctx = webrtc_streamer(key="example", video_transformer_factory=None)
 
 # Perform NLB detection based on user choice
 if uploaded_image is not None:
     st.image(uploaded_image, caption="Uploaded Image", use_column_width=True)
     image = Image.open(uploaded_image)
     st.header(perform_nlb_detection(image))
-elif "camera" in st.session_state and st.session_state.camera is not None:
-    if st.session_state.camera > 0.5:
-        st.warning("Your plants may be unhealthy. Consider taking the following steps:")
-        st.markdown("- Consult with an agricultural expert.")
-        st.markdown("- Apply appropriate treatments.")
-    else:
-        st.success("Your maize plants appear to be healthy. Here are some tips for maintaining their well-being:")
-        st.markdown("- Maintain a proper watering schedule.")
-        st.markdown("- Follow fertilization recommendations.")
-        st.header("Recommended Fertilizers:")
-        st.markdown("- [Booster Foliar Fertilizer 1Ltr](https://cheapthings.co.ke/product/booster-foliar-fertilizer-1ltr/?gad=1&gclid=Cj0KCQjwhL6pBhDjARIsAGx8D59O3FXxJTZkvS9UTNG8iNWSBqVuQ6DNVfmrVQNTImX0ohgp80AX1qIaAvlJEALw_wcB)")
+elif webrtc_ctx.video_receiver:
+    image = webrtc_ctx.video_receiver.value
+    st.header(perform_nlb_detection(image))
