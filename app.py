@@ -1,8 +1,8 @@
 import streamlit as st
-from PIL import Image
+import cv2
 import numpy as np
+from PIL import Image
 from tensorflow.keras.models import load_model
-from streamlit_webrtc import webrtc_streamer
 
 # Set page configuration
 st.set_page_config(page_title="NLB Maize Detection", page_icon="🌽", layout="centered")
@@ -43,7 +43,7 @@ st.markdown(
 st.title("NLB Maize Detection")
 st.write("Detect Northern Leaf Blight (NLB) in maize plants from images.")
 
-# Instructions with additional recommendations and photo requirements
+# Instructions
 st.header("Instructions")
 st.markdown("1. Choose an option to provide an image for NLB detection:")
 st.markdown("   - Option 1: Upload an image of a maize leaf.")
@@ -56,26 +56,70 @@ st.markdown("4. If your plants are healthy, we recommend some fertilizers for yo
 st.markdown("5. If your plants are unhealthy, we recommend taking the following steps:")
 st.markdown("6. If your plants are unhealthy, we recommend taking the following steps:")
 
-# Function to perform NLB detection on an image
-def perform_nlb_detection(image):
-    preprocessed_image = preprocess_image(image)
-    prediction = model.predict(np.expand_dims(preprocessed_image, axis=0))
-    prediction_probability = prediction[0][0]
-    return prediction_probability
-
-# Option to upload an image
-st.header("Option 1: Upload an Image")
+# Option 1: Upload an Image
+st.subheader("Option 1: Upload an Image")
 uploaded_image = st.file_uploader("Upload an image of a maize leaf", type=["jpg", "jpeg", "png"])
 
-# Option to capture an image from the camera
-st.header("Option 2: Capture Image from Camera")
-webrtc_ctx = webrtc_streamer(key="example", video_transformer_factory=None)
 
-# Perform NLB detection based on user choice
+# Create a placeholder for the camera capture
+capture_placeholder = st.empty()
+
 if uploaded_image is not None:
+    # Display uploaded image
     st.image(uploaded_image, caption="Uploaded Image", use_column_width=True)
+
     image = Image.open(uploaded_image)
-    st.header(perform_nlb_detection(image))
-elif webrtc_ctx.video_receiver:
-    image = webrtc_ctx.video_receiver.value
-    st.header(perform_nlb_detection(image))
+    preprocessed_image = preprocess_image(image)
+
+    # Perform NLB detection
+    with st.spinner("Analyzing..."):
+        prediction = model.predict(np.expand_dims(preprocessed_image, axis=0))
+        prediction_probability = prediction[0][0]
+
+    st.header(f"Prediction Probability: {prediction_probability:.2f}")
+
+    # Provide recommendations based on the prediction
+    if prediction_probability > 0.5:
+        st.warning("Your plants may be unhealthy. Consider taking the following steps:")
+        st.markdown("- Consult with an agricultural expert.")
+        st.markdown("- Apply appropriate treatments.")
+    else:
+        st.success("Your maize plants appear to be healthy. Here are some tips for maintaining their well-being:")
+        st.markdown("- Maintain a proper watering schedule.")
+        st.markdown("- Follow fertilization recommendations.")
+        st.header("Recommended Fertilizers:")
+        st.markdown("- [Booster Foliar Fertilizer 1Ltr](https://cheapthings.co.ke/product/booster-foliar-fertilizer-1ltr/?gad=1&gclid=Cj0KCQjwhL6pBhDjARIsAGx8D59O3FXxJTZkvS9UTNG8iNWSBqVuQ6DNVfmrVQNTImX0ohgp80AX1qIaAvlJEALw_wcB)")
+    # Hide the camera capture option
+    capture_placeholder.empty()
+elif uploaded_image is None:
+    # Capture Image from Camera
+    cap = cv2.VideoCapture(0)  # 0 for the default camera
+
+    if st.button("Capture Image"):
+        ret, frame = cap.read()
+        if ret:
+            image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+            st.image(image, caption="Captured Image", use_column_width=True)
+            preprocessed_image = preprocess_image(image)
+            with st.spinner("Analyzing..."):
+                prediction = model.predict(np.expand_dims(preprocessed_image, axis=0))
+                prediction_probability = prediction[0][0]
+
+            st.header(f"Prediction Probability: {prediction_probability:.2f}")
+
+            # Provide recommendations based on the prediction
+            if prediction_probability > 0.5:
+                st.warning("Your plants may be unhealthy. Consider taking the following steps:")
+                st.markdown("- Consult with an agricultural expert.")
+                st.markdown("- Apply appropriate treatments.")
+            else:
+                st.success("Your maize plants appear to be healthy. Here are some tips for maintaining their well-being:")
+                st.markdown("- Maintain a proper watering schedule.")
+                st.markdown("- Follow fertilization recommendations.")
+                st.header("Recommended Fertilizers:")
+                st.markdown("- [Booster Foliar Fertilizer 1Ltr](https://cheapthings.co.ke/product/booster-foliar-fertilizer-1ltr/?gad=1&gclid=Cj0KCQjwhL6pBhDjARIsAGx8D59O3FXxJTZkvS9UTNG8iNWSBqVuQ6DNVfmrVQNTImX0ohgp80AX1qIaAvlJEALw_wcB)")
+        else:
+            st.write("Failed to capture an image. Please try again.")
+
+    # Release the camera when not in use
+    cap.release()
